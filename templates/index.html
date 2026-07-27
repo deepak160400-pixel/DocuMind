@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}DocuMind AI{% endblock %}
+
+{% block content %}
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <button class="icon-btn">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <h3>DocuMind</h3>
+
+            <button class="icon-btn">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+
+        </div>
+
+        <button class="new-chat-btn">
+
+            <i class="bi bi-plus-lg"></i>
+
+            New Chat
+
+        </button>
+
+        <div class="menu-title">
+
+            Uploaded Documents
+
+        </div>
+
+        <div
+            class="documents"
+            id="documents"
+        >
+
+            <div class="doc-card">
+
+                <i class="bi bi-file-earmark"></i>
+
+                <div>
+
+                    <h6>No Documents</h6>
+
+                    <small>Upload PDF / PPT</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="menu-title">
+
+            Recent Chats
+
+        </div>
+
+        <div
+            class="chat-history"
+            id="chatHistory"
+        >
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <button class="bottom-btn">
+
+                <i class="bi bi-gear"></i>
+
+                Settings
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- CHAT -->
+
+    <main class="chat-section">
+
+        <header class="topbar">
+
+            <h4>DocuMind AI</h4>
+
+            <button class="profile">
+
+                D
+
+            </button>
+
+        </header>
+
+        <div class="chat-body">
+
+            <div class="welcome">
+
+                <div class="logo-circle">
+
+                    🤖
+
+                </div>
+
+                <h1>
+
+                    Welcome to DocuMind AI
+
+                </h1>
+
+                <p>
+
+                    Upload your documents and chat with them.
+
+                </p>
+
+                <button
+                    class="primary-btn"
+                    id="uploadButton"
+                >
+
+                    <i class="bi bi-upload"></i>
+
+                    Upload Documents
+
+                </button>
+
+            </div>
+
+            <div id="chatMessages"></div>
+
+        </div>
+
+        <div class="chat-input-container">
+
+            <button class="attach-btn">
+
+                <i class="bi bi-paperclip"></i>
+
+            </button>
+
+            <textarea
+                id="messageInput"
+                rows="1"
+                placeholder="Message DocuMind AI..."
+            ></textarea>
+
+            <button class="send-btn">
+
+                <i class="bi bi-send-fill"></i>
+
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<input
+    type="file"
+    id="fileInput"
+    hidden
+    accept=".pdf,.ppt,.pptx"
+/>
+
+{% endblock %}
