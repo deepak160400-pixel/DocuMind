@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}DocuMind AI{% endblock %}
+
+{% block content %}
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <button class="icon-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            <h3>DocuMind</h3>
+            <button class="icon-btn">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+        </div>
+
+        <button class="new-chat-btn" onclick="newChat()">
+            <i class="bi bi-plus-lg"></i>
+            New Chat
+        </button>
+
+        <div class="menu-title">UPLOADED DOCUMENTS</div>
+
+        <div class="documents" id="documents">
+            <!-- Documents will be loaded here by JavaScript -->
+        </div>
+
+        <div class="menu-title">RECENT CHATS</div>
+        <div class="chat-history" id="chatHistory">
+            <div style="color: var(--text2); padding: 10px; text-align: center; font-size: 14px;">
+                No recent chats
+            </div>
+        </div>
+
+        <div class="sidebar-bottom">
+            <button class="bottom-btn" onclick="clearAllDocuments()">
+                <i class="bi bi-trash"></i>
+                Clear All Documents
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CHAT SECTION -->
+    <main class="chat-section">
+
+        <header class="topbar">
+            <h4>DocuMind AI</h4>
+            <button class="profile" onclick="showAbout()">D</button>
+        </header>
+
+        <div class="chat-body" id="chatBody">
+
+            <!-- WELCOME SCREEN -->
+            <div class="welcome" id="welcomeScreen">
+                <div class="logo-circle">🤖</div>
+                <h1>Welcome to DocuMind AI</h1>
+                <p>Upload your documents and chat with them.</p>
+                <div class="welcome-buttons">
+                    <button class="primary-btn" id="uploadButton">
+                        <i class="bi bi-upload"></i>
+                        Upload Documents
+                    </button>
+                </div>
+                <div style="margin-top: 20px; color: var(--text2); font-size: 14px;">
+                    <i class="bi bi-info-circle"></i>
+                    Supports PDF, PPT, PPTX files
+                </div>
+            </div>
+
+            <!-- CHAT MESSAGES -->
+            <div id="chatMessages"></div>
+
+        </div>
+
+        <!-- INPUT -->
+        <div class="chat-input-container">
+
+            <button class="attach-btn" id="attachButton">
+                <i class="bi bi-paperclip"></i>
+            </button>
+
+            <textarea
+                id="messageInput"
+                rows="1"
+                placeholder="Message DocuMind AI..."
+            ></textarea>
+
+            <button class="send-btn" id="sendButton">
+                <i class="bi bi-send-fill"></i>
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Hidden file input -->
+<input type="file" id="fileInput" hidden accept=".pdf,.ppt,.pptx"/>
+
+<!-- JavaScript for sidebar controls -->
+<script>
+function newChat() {
+    // Clear chat messages but keep welcome
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.innerHTML = '';
+    const welcome = document.getElementById('welcomeScreen');
+    if (welcome) welcome.style.display = 'block';
+}
+
+async function clearAllDocuments() {
+    if (confirm('⚠️ Are you sure you want to clear ALL uploaded documents?\n\nThis will delete all indexed data and cannot be undone.')) {
+        try {
+            const response = await fetch('/clear', {
+                method: 'POST'
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert('✅ All documents cleared successfully!');
+                location.reload();
+            } else {
+                alert('❌ Failed to clear: ' + data.message);
+            }
+        } catch (e) {
+            alert('❌ Error clearing documents: ' + e.message);
+        }
+    }
+}
+
+function showAbout() {
+    alert('🤖 DocuMind AI\n\nIntelligent Document Assistant\n\nUpload PDF and PowerPoint files\nChat with your documents\nGet accurate answers with citations');
+}
+</script>
+
+{% endblock %}
