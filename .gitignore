@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Generated project data
+uploads/
+vector_store/
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# Archives
+*.zip
+
+# Logs
+*.log
